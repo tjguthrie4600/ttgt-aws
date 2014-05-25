@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140525165852) do
+ActiveRecord::Schema.define(:version => 20140525185427) do
+
+  create_table "instances", :force => true do |t|
+    t.string   "status"
+    t.string   "type"
+    t.string   "image"
+    t.string   "ip"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "instance_id"
+    t.string   "name"
+  end
+
+  add_index "instances", ["user_id", "created_at"], :name => "index_instances_on_user_id_and_created_at"
 
   create_table "users", :force => true do |t|
     t.string   "name"
