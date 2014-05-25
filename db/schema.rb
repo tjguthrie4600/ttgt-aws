@@ -11,16 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140525185427) do
+ActiveRecord::Schema.define(:version => 20140525201453) do
 
   create_table "instances", :force => true do |t|
-    t.string   "status"
-    t.string   "type"
+    t.string   "instanceType"
     t.string   "image"
     t.string   "ip"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "instance_id"
     t.string   "name"
   end
