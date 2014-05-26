@@ -5,6 +5,13 @@
       <h1>
 	<%= gravatar_for @user %>
 	<%= @user.name %>
+
+	<div id="actions">
+	  <%= link_to "Create Instances", new_instance_path, class: "btn btn-large btn-primary" %>
+	  <br><br>
+          <%= link_to "Destroy Instance", instances_path, class: "btn btn-large btn-primary" %>
+	</div>
+	</section>
       </h1>
     </section>
   </aside>

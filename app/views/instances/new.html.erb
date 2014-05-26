@@ -1,0 +1,20 @@
+<% provide(:title, 'Instance creation') %>
+<h1>Create instance</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@instance) do |f| %>
+      <%= render 'instances/error_messages' %>
+    
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :image %>
+      <%= f.select :image, Instance::IMAGES %>
+
+      <%= f.label :instanceType %>
+      <%= f.select :instanceType, Instance::TYPES %>
+
+      <%= f.submit "Create my instance", class: "btn btn-large btn=primary" %>
+    <% end %>
+  </div>
+</div>
