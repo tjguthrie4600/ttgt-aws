@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140525201453) do
+ActiveRecord::Schema.define(:version => 20140526202901) do
 
   create_table "instances", :force => true do |t|
     t.string   "instanceType"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20140525201453) do
     t.integer  "user_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.string   "instance_id"
+    t.string   "instanceID"
     t.string   "name"
   end
 

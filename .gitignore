@@ -16,3 +16,6 @@
 
 # Ignore emacs tilda files
 *~
+
+# Ignore keys
+/secret/*

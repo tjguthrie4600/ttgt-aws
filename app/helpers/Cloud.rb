@@ -23,6 +23,13 @@ class Cloud
     return result
   end
 
+  # Returns an the ip of an instance given an ID
+  def getIP(id)
+    instance = @ec2.instances[id]
+    result = instance.ip_address
+    return result
+  end
+
   # Returns the status of all AWS instances
   def getInstanceStatus()
     return @ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
