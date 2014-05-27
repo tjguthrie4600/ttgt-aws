@@ -1,13 +1,13 @@
 <li>
-  <span class="name"><%= instance.name %></span>
-  <span class="info">ID: <%= instance.instanceID %></span>
+  <span class="name"> <%= instance.name %> </span>
+  <span class="info"> ID: <%= instance.instanceID %>  <%= link_to "delete", instance, method: :delete, confirm: "You sure?" %> </span>
   <br>
-  <span class="info">IP: <%= instance.ip %></span>
+  <span class="info"> IP: <%= instance.ip %></span>
   <br>
-  <span class="info">Type: <%= instance.instanceType %></span>
+  <span class="info"> Type: <%= instance.instanceType %></span>
   <br>
-  <span class="info">Image: <%= instance.image %></span>
+  <span class="info"> Image: <%= instance.image %></span>
   <br>
-  <span class="info">Status: </span>
+  <span class="info"> Status: </span>
   <%= image_tag("red.png", alt: "TTGT", width: "20", height: "20", align: "right" ) %>
 </li>

@@ -64,6 +64,7 @@ class Cloud
     instance = @ec2.instances[id]
     response = ""
     if instance.exists?
+      instance.terminate()
       response = "Instance is terminating"
     else
       response = "Instance does not exist"

@@ -30,7 +30,7 @@ class InstancesController < ApplicationController
     # Save the instance information in the database
     @instance = current_user.instances.build(params[:instance].merge(:instanceID => cloudID, :ip => cloudIP))
     if @instance.save
-      flash[:sucess] = "Instance Created!"
+      flash[:success] = "Instance Created!"
       redirect_to "/users/#{current_user.id}"
     else
       render 'new'
@@ -38,6 +38,18 @@ class InstancesController < ApplicationController
   end
 
   def destroy
+    current_user ||= User.find_by_remember_token(cookies[:remember_token])
+
+    # Destroy the instance in AWS
+    cloud = Cloud.new("/apps/local/ttgt-aws/conf/AWS.conf")
+    instance = Instance.find(params[:id])
+    awsID = instance.instanceID
+    cloud.terminateInstance(awsID)
+
+    # Destroy the instance
+    instance.destroy
+    flash[:success] = "Instance destroyed."
+    redirect_to "/users/#{current_user.id}" 
   end
 
 end
