@@ -6,7 +6,7 @@
 	<%= gravatar_for @user %>
 	<%= @user.name %>
 	<% user=@user %>
-	<% if current_user.admin? || current_user?(user) %>
+	<% if current_user?(user) %>
 	  <div id="actions">
 	    <%= link_to "Create Instance", new_instance_path, class: "btn btn-large btn-primary" %>
 	  </div>

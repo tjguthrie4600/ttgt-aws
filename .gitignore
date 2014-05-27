@@ -17,3 +17,6 @@
 # Ignore emacs files
 *~
 \#*#
+
+# Ignore nohup
+nohup.*

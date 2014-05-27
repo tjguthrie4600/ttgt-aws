@@ -3,21 +3,21 @@
   <span class="name"> <%= instance.name %> </span>
   <span class="info"> 
     ID: <%= instance.instanceID %>
-    <% if current_user.admin? || current_user?(user) %>
+    <% if current_user?(user) %>
       <%= link_to "start", start_instances_path(instance)  %> 
     <% end %>
   </span>
   <br>
   <span class="info">
     IP: <%= instance.ip %> 
-    <% if current_user.admin? || current_user?(user) %>
+    <% if current_user?(user) %>
       <%= link_to "stop", stop_instances_path(instance) %> 
     <% end %>
   </span>
   <br>
   <span class="info"> 
     Type: <%= instance.instanceType %> 
-      <% if current_user.admin? || current_user?(user) %>
+      <% if current_user?(user) %>
         <%= link_to "delete", instance , method: :delete, confirm: "You sure?" %> 
       <% end %>
   </span>
