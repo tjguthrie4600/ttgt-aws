@@ -6,7 +6,7 @@
 	<%= gravatar_for @user %>
 	<%= @user.name %>
 	<% user=@user %>
-	<% if current_user?(user) %>
+	<% if current_user?(user) || current_user.admin? %>
 	  <div id="actions">
 	    <%= link_to "Create Instance", new_instance_path, class: "btn btn-large btn-primary" %>
 	  </div>
@@ -17,7 +17,7 @@
     </section>
   </aside>
   <div class="span8">
-    <% if @user.instances.any? && current_user?(user) %>
+    <% if @user.instances.any? && (current_user?(user) || current_user.admin?) %>
       <h3>Instances (<%= @user.instances.count %>)</h3>
       <ol class="instances">
 	<%= render @instances %>
