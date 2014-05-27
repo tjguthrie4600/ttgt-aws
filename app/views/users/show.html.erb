@@ -17,7 +17,7 @@
     </section>
   </aside>
   <div class="span8">
-    <% if @user.instances.any?  %>
+    <% if @user.instances.any? && current_user?(user) %>
       <h3>Instances (<%= @user.instances.count %>)</h3>
       <ol class="instances">
 	<%= render @instances %>
