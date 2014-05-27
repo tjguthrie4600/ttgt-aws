@@ -14,6 +14,6 @@
 /log/*.log
 /tmp
 
-# Ignore emacs tilda files
+# Ignore emacs files
 *~
-
+\#*#

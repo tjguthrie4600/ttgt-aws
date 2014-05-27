@@ -16,6 +16,18 @@ class Cloud
     return hash.keys
   end
 
+  # Start an instance
+  def startInstance(id)
+    instance = @ec2.instances[id]
+    instance.start()
+  end
+
+  # Stop an instance
+  def stopInstance(id)
+    instance = @ec2.instances[id]
+    instance.stop()
+  end
+
   # Gets information for a single instance given an ID
   def getInfo(id)
     instance = @ec2.instances[id]

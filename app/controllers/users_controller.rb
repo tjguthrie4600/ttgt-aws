@@ -57,6 +57,8 @@ class UsersController < ApplicationController
   end
 
   private
+
+    # Is the user signed in, if not redirect them
     def signed_in_user
       unless signed_in?
         store_location
@@ -64,11 +66,13 @@ class UsersController < ApplicationController
       end
     end
 
+    # Authorization
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
     end
 
+    # Authoriztion for super user
     def admin_user
       redirect_to(root_path) unless current_user.admin?
     end

@@ -3,12 +3,15 @@ class InstancesController < ApplicationController
   require 'Cloud'
   before_filter :signed_in_user
 
+  # New form for the instance to be created
   def new
     @instance = Instance.new
   end
 
   # Creates instance in AWS and in application database
   def create    
+    
+    # Find the user
     current_user ||= User.find_by_remember_token(cookies[:remember_token])
       
     # Get information from form
@@ -38,6 +41,8 @@ class InstancesController < ApplicationController
   end
 
   def destroy
+
+    # Find the user
     current_user ||= User.find_by_remember_token(cookies[:remember_token])
 
     # Destroy the instance in AWS
@@ -46,10 +51,38 @@ class InstancesController < ApplicationController
     awsID = instance.instanceID
     cloud.terminateInstance(awsID)
 
-    # Destroy the instance
+    # Destroy the instance in the database
     instance.destroy
     flash[:success] = "Instance destroyed."
     redirect_to "/users/#{current_user.id}" 
+  end
+
+  def start
+
+    # Start the instance in the cloud
+    cloud = Cloud.new("/apps/local/ttgt-aws/conf/AWS.conf")
+    instance = Instance.find(params[:id])
+    awsID = instance.instanceID
+    cloud.startInstance(awsID)
+
+    # Report back to user
+    current_user ||= User.find_by_remember_token(cookies[:remember_token])
+    flash[:success] = "Instance Starting!"
+    redirect_to "/users/#{current_user.id}"
+  end
+
+  def stop
+
+    # Stop the instance in the cloud
+    cloud = Cloud.new("/apps/local/ttgt-aws/conf/AWS.conf")
+    instance = Instance.find(params[:id])
+    awsID = instance.instanceID
+    cloud.stopInstance(awsID)
+    
+    # Report back to user
+    current_user ||= User.find_by_remember_token(cookies[:remember_token])
+    flash[:success] = "Instance Stopping!"
+    redirect_to "/users/#{current_user.id}"
   end
 
 end

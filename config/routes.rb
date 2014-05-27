@@ -2,7 +2,7 @@ TtgtAws::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :instances, only: [:new, :create, :destroy]
+  resources :instances, only: [:new, :create, :destroy, :start, :stop]
 
   root to: 'static_pages#home'
 
@@ -12,6 +12,17 @@ TtgtAws::Application.routes.draw do
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+
+  get 'instances/start/:id' => 'instances#start', :as => :start_instances
+  get 'instances/stop/:id' => 'instances#stop', :as => :stop_instances
+  
+
+ # match "instances/:id/start", to: "instances#start", via: :get
+ # match "instances/:id/stop", to: "instances#stop", via: :get
+
+
+  
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
