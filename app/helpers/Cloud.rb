@@ -10,12 +10,6 @@ class Cloud
     @ec2 = AWS::EC2.new()
   end
 
-  # Gets a list of instances
-  def getInstances()
-    hash = @ec2.instances.inject({}) { |m, i| m[i.id] = ""; m}
-    return hash.keys
-  end
-
   # Start an instance
   def startInstance(id)
     instance = @ec2.instances[id]
@@ -26,13 +20,6 @@ class Cloud
   def stopInstance(id)
     instance = @ec2.instances[id]
     instance.stop()
-  end
-
-  # Gets information for a single instance given an ID
-  def getInfo(id)
-    instance = @ec2.instances[id]
-    result = "#{instance.status}:#{instance.ip_address}:#{instance.instance_type}:#{instance.image_id}"
-    return result
   end
 
   # Returns an the ip of an instance given an ID
@@ -49,26 +36,6 @@ class Cloud
     return result
   end
 
-  # Returns the status of all AWS instances
-  def getInstanceStatus()
-    return @ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
-  end
-
-  # Returns the ip of all AWS instances
-  def getInstanceIP()
-    return @ec2.instances.inject({}) { |m, i| m[i.id] = i.ip_address; m }
-  end
-
-  # Returns the ip of all AWS instances
-  def getInstanceType()
-    return @ec2.instances.inject({}) { |m, i| m[i.id] = i.instance_type; m }
-  end
-
-  # Returns the ip of all AWS instances
-  def getInstanceImage()
-    return @ec2.instances.inject({}) { |m, i| m[i.id] = i.image_id; m }
-  end
-    
   # Creates an AWS instance
   def createInstance(image,type,owner)
     instance = @ec2.instances.create(
