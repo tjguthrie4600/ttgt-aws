@@ -41,7 +41,6 @@ class InstancesController < ApplicationController
   end
 
   def destroy
-
     # Find the user
     current_user ||= User.find_by_remember_token(cookies[:remember_token])
 
@@ -53,12 +52,12 @@ class InstancesController < ApplicationController
 
     # Destroy the instance in the database
     instance.destroy
+    session[:return_to] ||= request.referer
     flash[:success] = "Instance destroyed."
-    redirect_to "/users/#{current_user.id}" 
+    redirect_to session.delete(:return_to)
   end
 
   def start
-
     # Start the instance in the cloud
     cloud = Cloud.new("/apps/local/ttgt-aws/conf/AWS.conf")
     instance = Instance.find(params[:id])
@@ -67,12 +66,12 @@ class InstancesController < ApplicationController
 
     # Report back to user
     current_user ||= User.find_by_remember_token(cookies[:remember_token])
+    session[:return_to] ||= request.referer
     flash[:success] = "Instance Starting!"
-    redirect_to "/users/#{current_user.id}"
+    redirect_to session.delete(:return_to)
   end
 
   def stop
-
     # Stop the instance in the cloud
     cloud = Cloud.new("/apps/local/ttgt-aws/conf/AWS.conf")
     instance = Instance.find(params[:id])
@@ -81,8 +80,9 @@ class InstancesController < ApplicationController
     
     # Report back to user
     current_user ||= User.find_by_remember_token(cookies[:remember_token])
+    session[:return_to] ||= request.referer
     flash[:success] = "Instance Stopping!"
-    redirect_to "/users/#{current_user.id}"
+    redirect_to session.delete(:return_to)
   end
 
 end

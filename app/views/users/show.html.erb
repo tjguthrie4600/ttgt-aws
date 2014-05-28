@@ -7,7 +7,7 @@
 	<%= @user.name %>
 	<% user=@user %>
 	
-	<% if current_user?(user) || (current_user && current_user.admin?) %>
+	<% if current_user?(user) %>
 	  <div id="actions">
 	    <%= link_to "Create Instance", new_instance_path, class: "btn btn-large btn-primary" %>
 	  </div>
