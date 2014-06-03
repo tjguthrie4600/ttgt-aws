@@ -5,7 +5,7 @@ class Instance < ActiveRecord::Base
   TYPES = ['t1.micro', 'm1.small', 'm3.medium', 'm3.large', 'm3.xlarge', 'm3.2xlarge']
   KEYS = ['TT-AWS-ENG-201405', 'test-key-pair-elg-01', 'tjguthrie4600']
   
-  attr_accessible :name, :image, :instanceType, :instanceID, :ip
+  attr_accessible :name, :image, :instanceType, :instanceID, :ip, :sshKeys, :weightPoints
 
   belongs_to :user
 
