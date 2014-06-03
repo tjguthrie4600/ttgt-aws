@@ -1,8 +1,8 @@
 class Instance < ActiveRecord::Base
 
   # IMAGES = [Amazon2013.03.1, RHEL6.5, SUSEServer11, UbuntuServer14.04] 
-  IMAGES = ['ami-043a5034', 'ami-aa8bfe9a', 'ami-d8b429e8', 'ami-6ac2a85a']
-  TYPES = ['t1.micro']
+  IMAGES = ['ami-fb8e9292', 'ami-8d756fe4', 'ami-e8084981', 'ami-018c9568']
+  TYPES = ['t1.micro', 'm1.small', 'm3.medium', 'm3.large', 'm3.xlarge', 'm3.2xlarge']
   attr_accessible :name, :image, :instanceType, :instanceID, :ip
 
   belongs_to :user
