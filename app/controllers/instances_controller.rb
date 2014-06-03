@@ -17,10 +17,11 @@ class InstancesController < ApplicationController
     # Get information from form
     image = params[:instance][:image]
     instanceType = params[:instance][:instanceType]
+    sshKeys = params[:instance][:sshKeys]
 
     # Create the new instance in AWS
     cloud = Cloud.new("/apps/local/ttgt-aws/conf/AWS.conf")
-    cloudInstance = cloud.createInstance(image, instanceType, "tjguthrie4600")
+    cloudInstance = cloud.createInstance(image, instanceType, sshKeys)
     cloudID = cloudInstance.id
     cloudIP = nil
     

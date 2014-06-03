@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140526202901) do
+ActiveRecord::Schema.define(:version => 20140603201747) do
 
   create_table "instances", :force => true do |t|
     t.string   "instanceType"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20140526202901) do
     t.datetime "updated_at",   :null => false
     t.string   "instanceID"
     t.string   "name"
+    t.string   "sshKeys"
+    t.integer  "weightPoints"
   end
 
   add_index "instances", ["user_id", "created_at"], :name => "index_instances_on_user_id_and_created_at"
