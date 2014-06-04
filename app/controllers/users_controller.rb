@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  require 'net/smtp'
+
   before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_filter :correct_user, only: [:edit, :update]
   before_filter :admin_user, only: :destroy
@@ -20,6 +22,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user].merge(:weightPoints => 0, :lock => true))
     if @user.save
       # Handle a successful save
+      sendEmail @user
       flash[:success] = "Welcome to the AWS Web Interface! Your system administrator must manually unlock your account. A request has been sent. You will get an email when your account has been activated."
       redirect_to @user
     else
@@ -88,4 +91,23 @@ class UsersController < ApplicationController
         cloud.terminateInstance(awsID)
       end
     end
+
+# Sends email to sysadmins for new account activation
+def sendEmail(user)
+  name = user.name
+  email = user.email
+  id = user.id
+  command = 'ssh root@pv-railsma1.techtarget.com \'cd /apps/local/ttgt-aws/srv && echo "User.find(' + id.to_s + ').toggle!(:lock)" | rails console\''
+  message = <<MESSAGE_END
+From: AWS Application <aws@railsma1.techtarget.com>
+To: SysAdmins <sysadmins@techtarget.com>
+Subject: Account Request
+
+\nName = #{name} \nEmail = #{email} \nID = #{id} \nCommand to Activate = #{command}\n 
+MESSAGE_END
+  Net::SMTP.start('localhost') do |smtp|
+    smtp.send_message message, 'aws@railsma1.techtarget.com',
+    'sysadmins@techtarget.com'
+  end
+end
 end

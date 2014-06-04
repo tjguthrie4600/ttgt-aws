@@ -114,9 +114,6 @@ class InstancesController < ApplicationController
       newPoints = currentPoints - weightMapping[type]
     end
 
-    logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" 
-    logger.info newPoints
-
     if newPoints < 25
       user.update_column(:weightPoints, newPoints)
       success = true
