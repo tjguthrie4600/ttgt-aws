@@ -1,8 +1,12 @@
 module SessionsHelper
 
   def sign_in(user)
-    cookies.permanent[:remember_token] = user.remember_token
-    self.current_user = user
+    if !user.lock
+      cookies.permanent[:remember_token] = user.remember_token
+      self.current_user = user
+    else
+      flash[:failure] = "Account Locked."
+    end
   end
   
   def signed_in?
