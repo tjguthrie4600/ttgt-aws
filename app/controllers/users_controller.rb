@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   # Create the new user record, provided from information in the form
   def create
-    @user = User.new(params[:user].merge(:weightPoints => 0 :lock => true))
+    @user = User.new(params[:user].merge(:weightPoints => 0, :lock => true))
     if @user.save
       # Handle a successful save
       flash[:success] = "Welcome to the AWS Web Interface!"
