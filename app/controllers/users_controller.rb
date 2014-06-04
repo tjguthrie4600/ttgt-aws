@@ -52,7 +52,9 @@ class UsersController < ApplicationController
 
   # Remove a user from the database
   def destroy
-    User.find(params[:id]).destroy
+    user = User.find(params[:id])
+    destroyInstances(user)
+    user.destroy
     flash[:success] = "User destroyed."
     redirect_to users_path
   end
@@ -76,5 +78,15 @@ class UsersController < ApplicationController
     # Authoriztion for super user
     def admin_user
       redirect_to(root_path) unless current_user.admin?
+    end
+
+    # Destroys all instances assicoated with user in AWS
+    def destroyInstances(user)
+      cloud = Cloud.new("/apps/local/ttgt-aws/conf/AWS.conf")
+      instances = Instance.where(:user_id => user.id)
+      for instance in instances
+        awsID = instance.instanceID
+        cloud.terminateInstance(awsID)
+      end
     end
 end
