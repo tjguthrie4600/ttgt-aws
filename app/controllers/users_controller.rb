@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user].merge(:weightPoints => 0, :lock => true))
     if @user.save
       # Handle a successful save
-      flash[:success] = "Welcome to the AWS Web Interface! Your system administrator must unlock your account, a request has been sent"
+      flash[:success] = "Welcome to the AWS Web Interface! Your system administrator must manually unlock your account. A request has been sent. You will get an email when your account has been activated."
       redirect_to @user
     else
       render 'new'
