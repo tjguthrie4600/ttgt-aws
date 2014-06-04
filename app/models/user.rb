@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :weightPoints
+  attr_accessible :name, :email, :password, :password_confirmation, :weightPoints, :lock
   has_secure_password
 
   has_many :instances, dependent: :destroy
@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
   validates :weightPoints, length: { maximum: 25 }
+  validates :lock, presence: true
 
   private
     def create_remember_token
