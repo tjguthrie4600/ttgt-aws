@@ -61,6 +61,17 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  # If the account is locked this function will unlock the user
+  def unlock
+    user = User.find(params[:id])
+    if user.lock
+      user.toggle!(:lock)
+    end
+    session[:return_to] ||= request.referer
+    flash[:success] = "#{user.name}'s account has been unlocked!"
+    redirect_to session.delete(:return_to)
+  end
+
   private
 
     # Is the user signed in, if not redirect them

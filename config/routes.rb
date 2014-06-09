@@ -15,14 +15,11 @@ TtgtAws::Application.routes.draw do
 
   get 'instances/start/:id' => 'instances#start', :as => :start_instances
   get 'instances/stop/:id' => 'instances#stop', :as => :stop_instances
+
+  get 'users/unlock/:id' => 'users#unlock', :as => :unlock
   
-
- # match "instances/:id/start", to: "instances#start", via: :get
- # match "instances/:id/stop", to: "instances#stop", via: :get
-
-
   
-
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
