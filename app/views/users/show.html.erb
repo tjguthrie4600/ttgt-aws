@@ -5,6 +5,8 @@
       <h1>
 	<%= gravatar_for @user %>
 	<%= @user.name %>
+	<br>
+	<font size="2"> Points: <%= @user.weightPoints %> </font>
 	<% user=@user %>
 	
 	<% if current_user?(user) %>
