@@ -108,13 +108,12 @@ def sendEmail(user)
   name = user.name
   email = user.email
   id = user.id
-  command = 'ssh root@pv-railsma1.techtarget.com \'cd /apps/local/ttgt-aws/srv && echo "User.find(' + id.to_s + ').toggle!(:lock)" | rails console\''
   message = <<MESSAGE_END
 From: AWS Application <aws@railsma1.techtarget.com>
 To: SysAdmins <sysadmins@techtarget.com>
 Subject: Account Request
 
-\nName = #{name} \nEmail = #{email} \nID = #{id} \nCommand to Activate = #{command}\n 
+\nName = #{name} \nEmail = #{email} \nID = #{id} \n
 MESSAGE_END
   Net::SMTP.start('localhost') do |smtp|
     smtp.send_message message, 'aws@railsma1.techtarget.com',
